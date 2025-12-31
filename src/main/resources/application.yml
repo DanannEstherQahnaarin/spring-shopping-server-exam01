@@ -33,6 +33,19 @@ spring:
       password: admin
       roles: ADMIN
 
+# JWT 설정
+jwt:
+  # JWT 서명에 사용할 비밀키 (최소 256비트 권장)
+  # 프로덕션 환경에서는 환경 변수나 외부 설정으로 관리해야 함
+  # 예: export JWT_SECRET=$(openssl rand -base64 32)
+  secret: pZI3Yt3e6Duv37kmjZ6KdK2PvPmCPKW1ydg/RnwFB54=
+  # Access Token 만료 시간 (밀리초) - 기본 1시간
+  access-token-expiration: 3600000
+  # Refresh Token 만료 시간 (밀리초) - 기본 7일
+  refresh-token-expiration: 604800000
+  # JWT 발급자 (Issuer)
+  issuer: shopping-server
+
 # 서버 설정
 server:
   port: 8080
