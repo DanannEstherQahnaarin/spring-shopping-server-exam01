@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: shopping-server
+
+  # 데이터소스 설정
+  datasource:
+    # Docker 호스트(localhost)의 3306 포트로 접속
+    url: jdbc:mysql://localhost:3306/scott?useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    username: scott
+    password: tiger
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # JPA/Hibernate 설정
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        "[format_sql]": false
+        # Java Entity와 DB 불일치 시 에러를 발생시켜 검증함
+        # 엔티티가 없어서 에러가 난다면 'none' 또는 'update'로 잠시 변경 가능
+        # ddl-auto 옵션: validate, update, create, create-drop, none
+
+  # Spring Security 설정 (기본 인증 비활성화 - 개발용)
+  security:
+    user:
+      name: admin
+      password: admin
+      roles: ADMIN
+
+# 서버 설정
+server:
+  port: 8080
+
+# 로깅 설정
+logging:
+  level:
+    root: INFO
+    "[com.example.shpping]": DEBUG
+    "[org.hibernate.SQL]": DEBUG
+    "[org.hibernate.type.descriptor.sql]": TRACE  # 바인딩 파라미터 확인용
+    "[org.springframework.security]": DEBUG
