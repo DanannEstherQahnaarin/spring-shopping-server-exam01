@@ -15,7 +15,7 @@ import com.example.shopping.global.security.JwtTokenProvider;
 
 import jakarta.transaction.Transactional;
 
-public class ServiceAuth {
+public class AuthService {
     private UserRepository userRepository;
     private UserAuthRepository userAuthRepository;
     private UserProfileRepository userProfileRepository;
@@ -69,7 +69,7 @@ public class ServiceAuth {
         }
 
         user.updateLastLogin();
-        String token = tokenProvider.createToken(String.valueOf(user.getUserId()), "User_Role");
+        String token = tokenProvider.createToken(String.valueOf(user.getUserId()), "ROLE_USER");
         return new AuthDto.TokenResponse(token);
     }
 }
