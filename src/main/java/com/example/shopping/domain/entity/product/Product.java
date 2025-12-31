@@ -28,4 +28,12 @@ public class Product {
 
     @Column(nullable = false)
     private Integer stock;
+
+    public void removeStock(int quantity) {
+        int restStock = this.stock - quantity;
+        if (restStock < 0) {
+            
+        }
+        this.stock = restStock;
+    }
 }

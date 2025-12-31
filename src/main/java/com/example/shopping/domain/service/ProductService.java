@@ -8,7 +8,7 @@ import com.example.shopping.domain.entity.product.Product;
 import com.example.shopping.domain.repository.CategoryRepository;
 import com.example.shopping.domain.repository.ProductRepository;
 
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -38,5 +38,10 @@ public class ProductService {
                 .build();
 
         return productRepository.save(product).getProductId();
+    }
+
+    @Transactional(readOnly = true) // 조회 전용 트랜잭션 (성능 최적화)
+    public java.util.List<ProductDto.Response> getProductList() {
+        return productRepository.findAllProducts();
     }
 }

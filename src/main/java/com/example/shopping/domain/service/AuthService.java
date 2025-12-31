@@ -13,7 +13,7 @@ import com.example.shopping.domain.repository.UserProfileRepository;
 import com.example.shopping.domain.repository.UserRepository;
 import com.example.shopping.global.security.JwtTokenProvider;
 
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 public class AuthService {
     private UserRepository userRepository;
