@@ -29,11 +29,17 @@ public enum ErrorCode {
     DUPLICATE_LOGIN_ID(HttpStatus.BAD_REQUEST, "AUTH_003", "이미 사용 중인 로그인 ID입니다."),
     DUPLICATE_EMAIL(HttpStatus.BAD_REQUEST, "AUTH_004", "이미 사용 중인 이메일입니다."),
     
+    // 권한 관련 에러 (400)
+    NOT_HAVE_PERMISSION(HttpStatus.BAD_REQUEST, "AUTH_004", "권한이 없습니다."),
+
     // 상품 관련 에러 (400)
     PRODUCT_NOT_FOUND(HttpStatus.BAD_REQUEST, "PRODUCT_001", "상품을 찾을 수 없습니다."),
     CATEGORY_NOT_FOUND(HttpStatus.BAD_REQUEST, "PRODUCT_002", "카테고리를 찾을 수 없습니다."),
     INSUFFICIENT_STOCK(HttpStatus.BAD_REQUEST, "PRODUCT_003", "재고가 부족합니다."),
     
+    // 장바구니 관련 에러 (400)
+    CART_ITEM_NOT_FOUND(HttpStatus.BAD_REQUEST, "CART_ITEM_001", "장바구니 항목을 찾을 수 없습니다."),
+
     // 주문 관련 에러 (400)
     CART_EMPTY(HttpStatus.BAD_REQUEST, "ORDER_001", "장바구니가 비어있습니다."),
     NO_ITEMS_TO_ORDER(HttpStatus.BAD_REQUEST, "ORDER_002", "주문할 상품이 없습니다."),

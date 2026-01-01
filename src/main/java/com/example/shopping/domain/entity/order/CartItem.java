@@ -95,4 +95,8 @@ public class CartItem {
     public void addQty(int qty) {
         this.qty += qty;
     }
+
+    public void updateQty(int qty) {
+        this.qty = qty;
+    }
 }

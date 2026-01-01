@@ -1,10 +1,13 @@
 # Shopping App Server
 
 Spring Boot 기반의 RESTful API 쇼핑몰 서버 애플리케이션
+> JWT 인증 기반 쇼핑몰 백엔드 REST API 서버 (Spring Boot / JPA / QueryDSL)
 
 ## 프로젝트 소개
 
-이 프로젝트는 Spring Boot와 JPA를 활용한 쇼핑몰 백엔드 서버입니다. **실전에서 자주 사용되는 Spring 기반 웹 애플리케이션 개발 패턴과 Best Practice를 학습하고 적용하기 위해** 개발되었습니다. 
+이 프로젝트는 Spring Boot 기반의 쇼핑몰 백엔드 REST API 서버입니다.
+**JWT 인증**, **트랜잭션 관리**, **예외 처리 구조** 등
+실무에서 빈번하게 요구되는 서버 사이드 요구사항을 중심으로 구현되었습니다.
 
 주요 목적:
 - **RESTful API 설계 원칙** 이해 및 적용

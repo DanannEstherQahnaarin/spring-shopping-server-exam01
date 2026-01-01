@@ -241,4 +241,37 @@ public class OrderService {
 
         return order.getOrderId();
     }
+
+    @Transactional
+    public void updateCartItemQty(Long userId, Long cartItemId, int qty) {
+        CartItem cartItem = cartItemRepository.findById(cartItemId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.CART_ITEM_NOT_FOUND));
+
+        // 본인의 장바구니인지 검증
+        if (!cartItem.getCart().getUserId().equals(userId)) {
+            throw new BusinessException(ErrorCode.NOT_HAVE_PERMISSION);
+        }
+
+        if (qty <= 0) {
+            // 수량이 0 이하면 삭제 처리
+            cartItemRepository.delete(cartItem);
+        } else {
+            // 수량 변경 (더티 체킹)
+            cartItem.updateQty(qty);
+        }
+    }
+
+    // 장바구니 항목 삭제
+    @Transactional
+    public void deleteCartItem(Long userId, Long cartItemId) {
+        CartItem cartItem = cartItemRepository.findById(cartItemId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.CART_ITEM_NOT_FOUND));
+                
+
+        if (!cartItem.getCart().getUserId().equals(userId)) {
+            throw new BusinessException(ErrorCode.NOT_HAVE_PERMISSION);
+        }
+
+        cartItemRepository.delete(cartItem);
+    }
 }
