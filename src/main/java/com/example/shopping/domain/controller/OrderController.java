@@ -224,10 +224,36 @@ public class OrderController {
      * @return 생성된 주문 ID를 포함한 ResponseEntity
      * @throws RuntimeException 장바구니가 비어있거나, 주문할 상품이 없거나, 재고가 부족한 경우
      */
-    @PostMapping("/order/create")
+    @PostMapping("/create")
     public ResponseEntity<Long> createOrder(@RequestHeader("Authorization") String token) {
         Long userId = getUserId(token);
         Long orderId = orderService.createOrder(userId);
         return ResponseEntity.ok(orderId);
+    }
+
+    // 주문 목록 조회
+    @GetMapping("/list")
+    public ResponseEntity<List<OrderDto.OrderResponse>> getOrderList(@RequestHeader("Authorization") String token) {
+        Long userId = getUserId(token);
+        return ResponseEntity.ok(orderService.getOrderList(userId));
+    }
+
+    // 주문 상세 조회
+    @GetMapping("/{orderId}/detail")
+    public ResponseEntity<OrderDto.OrderDetailResponse> getOrderDetail(
+            @RequestHeader("Authorization") String token,
+            @PathVariable Long orderId) {
+        Long userId = getUserId(token);
+        return ResponseEntity.ok(orderService.getOrderDetail(userId, orderId));
+    }
+
+    // 주문 취소
+    @PostMapping("/{orderId}/cancel")
+    public ResponseEntity<String> cancelOrder(
+            @RequestHeader("Authorization") String token,
+            @PathVariable Long orderId) {
+        Long userId = getUserId(token);
+        orderService.cancelOrder(userId, orderId);
+        return ResponseEntity.ok("주문이 취소되었습니다.");
     }
 }

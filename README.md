@@ -39,12 +39,12 @@ Spring Boot 기반의 RESTful API 쇼핑몰 서버 애플리케이션
     - 재고 차감 (트랜잭션 보장)
     - 주문 내역 저장
     - 장바구니 비우기
-- **주문 내역 관리** (서비스 레이어 구현 완료)
-  - 주문 내역 조회: 사용자의 모든 주문 목록 조회
-  - 주문 상세 조회: 특정 주문의 상세 정보 조회
-  - 주문 취소: 주문 취소 및 재고 복구
-- **주문 상태 관리** (서비스 레이어 구현 완료)
-  - 주문 상태 변경: 관리자 권한으로 주문 상태 변경
+- **주문 내역 관리**
+  - 주문 내역 조회: 사용자의 모든 주문 목록 조회 (`GET /api/orders/list`)
+  - 주문 상세 조회: 특정 주문의 상세 정보 조회 (`GET /api/orders/{orderId}/detail`)
+  - 주문 취소: 주문 취소 및 재고 복구 (`POST /api/orders/{orderId}/cancel`)
+- **주문 상태 관리**
+  - 주문 상태 변경: 관리자 권한으로 주문 상태 변경 (서비스 레이어 구현 완료, API 엔드포인트 추가 필요)
 
 ### 4. 통합 예외 처리 (Exception Handling)
 - 전역 예외 처리: `@RestControllerAdvice`를 활용한 일관된 에러 응답
@@ -232,7 +232,10 @@ Docker Compose를 사용한 실행 예시:
 - `GET /api/orders/cart` - 장바구니 조회 (인증 필요)
 - `PUT /api/orders/cart/update/{cartItemId}` - 장바구니 항목 수량 변경 (인증 필요)
 - `DELETE /api/orders/cart/delete/{cartItemId}` - 장바구니 항목 삭제 (인증 필요)
-- `POST /api/orders/order/create` - 주문하기 (인증 필요)
+- `POST /api/orders/create` - 주문하기 (인증 필요)
+- `GET /api/orders/list` - 주문 내역 조회 (인증 필요)
+- `GET /api/orders/{orderId}/detail` - 주문 상세 조회 (인증 필요)
+- `POST /api/orders/{orderId}/cancel` - 주문 취소 (인증 필요)
 
 ## 예외 처리 (Exception Handling)
 
@@ -385,20 +388,15 @@ HTTP 400 Bad Request
 - ✅ 장바구니 조회 (`GET /api/orders/cart`)
 - ✅ 장바구니 항목 수량 변경 (`PUT /api/orders/cart/update/{cartItemId}`)
 - ✅ 장바구니 항목 삭제 (`DELETE /api/orders/cart/delete/{cartItemId}`)
-- ✅ 주문하기 (`POST /api/orders/order/create`)
-- ✅ 주문 내역 조회 (서비스 레이어 구현 완료)
-- ✅ 주문 상세 조회 (서비스 레이어 구현 완료)
-- ✅ 주문 취소 (서비스 레이어 구현 완료, 재고 복구 포함)
-- ✅ 주문 상태 변경 (관리자, 서비스 레이어 구현 완료)
+- ✅ 주문하기 (`POST /api/orders/create`)
+- ✅ 주문 내역 조회 (`GET /api/orders/list`)
+- ✅ 주문 상세 조회 (`GET /api/orders/{orderId}/detail`)
+- ✅ 주문 취소 (`POST /api/orders/{orderId}/cancel`, 재고 복구 포함)
+- ✅ 주문 상태 변경 (관리자, 서비스 레이어 구현 완료, API 엔드포인트 추가 필요)
 
 #### 추가 가능한 기능
 - **장바구니 관리**
   - 장바구니 전체 비우기
-  
-- **주문 내역 관리**
-  - 주문 내역 조회 API 엔드포인트 추가 (`GET /api/orders`)
-  - 주문 상세 조회 API 엔드포인트 추가 (`GET /api/orders/{orderId}`)
-  - 주문 취소 API 엔드포인트 추가 (`POST /api/orders/{orderId}/cancel`)
   
 - **주문 상태 관리**
   - 주문 상태 변경 API 엔드포인트 추가 (관리자)
@@ -539,10 +537,9 @@ HTTP 400 Bad Request
 #### Phase 1 (기본 기능 확장)
 1. 상품 상세 조회, 수정, 삭제
 2. ✅ 장바구니 수량 변경, 항목 삭제 (구현 완료)
-3. ✅ 주문 내역 조회 (서비스 레이어 구현 완료, API 엔드포인트 추가 필요)
+3. ✅ 주문 내역 조회/상세/취소 (구현 완료)
 4. 프로필 조회/수정
-5. 주문 내역 조회/상세/취소 API 엔드포인트 추가
-6. 주문 상태 변경 API 엔드포인트 추가
+5. 주문 상태 변경 API 엔드포인트 추가
 
 #### Phase 2 (사용자 경험 개선)
 1. 상품 검색 및 필터링
