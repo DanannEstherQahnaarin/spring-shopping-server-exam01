@@ -249,7 +249,21 @@ Docker Compose를 사용한 실행 예시:
 
 프로젝트에 대한 더 자세한 정보는 다음 문서를 참고하세요:
 
+### 기본 문서
+
+- [아키텍처 결정 기록](./docs/ARCHITECTURE_DECISION_RECORD.md) - 아키텍처 결정 사항과 그 결정의 맥락, 이유, 결과
 - [API 엔드포인트](./docs/API.md) - 모든 API 엔드포인트 목록
 - [예외 처리](./docs/EXCEPTION_HANDLING.md) - 예외 처리 구조 및 사용법
 - [향후 기능](./docs/FUTURE_FEATURES.md) - 추가 및 확장 가능한 기능 목록
-- [고급 가이드](./docs/ADVANCED_GUIDE.md) - 시니어 개발자를 위한 성능 최적화, 보안, 운영 가이드
+
+### 고급 가이드
+
+- [보안 고려사항](./docs/SECURITY.md) - 인증/인가, API 보안, 데이터 보안
+- [트랜잭션 관리 전략](./docs/TRANSACTION_MANAGEMENT.md) - 트랜잭션 격리 수준, 분산 트랜잭션
+- [모니터링 및 로깅](./docs/MONITORING_LOGGING.md) - 구조화된 로깅, APM, 알림 설정
+- [테스트 전략](./docs/TESTING_STRATEGY.md) - 테스트 피라미드, 단위/통합 테스트, 커버리지
+- [CI/CD 파이프라인](./docs/CI_CD_PIPELINE.md) - GitHub Actions, 배포 전략
+- [데이터베이스 마이그레이션](./docs/DATABASE_MIGRATION.md) - Flyway 설정 및 사용법
+- [운영 가이드](./docs/OPERATIONS_GUIDE.md) - 트러블슈팅, 백업/복구, 성능 튜닝
+- [코드 품질 관리](./docs/CODE_QUALITY.md) - 정적 분석 도구, 코드 리뷰 체크리스트
+- [성능 벤치마크](./docs/PERFORMANCE_BENCHMARK.md) - 부하 테스트, 성능 프로파일링
