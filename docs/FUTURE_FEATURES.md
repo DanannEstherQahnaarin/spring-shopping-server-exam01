@@ -44,24 +44,37 @@
 
 ### 상품 관리 추가 가능한 기능
 
-- **상품 검색 및 필터링**
-  - 상품명 검색
-  - 카테고리별 필터링
-  - 가격 범위 필터링
-  - 재고 여부 필터링
-  - 정렬 옵션 (가격, 이름, 등록일 등)
+- **상품 검색 및 필터링** (Repository 레벨 구현 완료, Service/Controller 연동 필요)
+  - ✅ QueryDSL 기반 동적 쿼리 구현 완료 (`ProductRepositoryImpl.search()`)
+  - ✅ 상품명 검색 (keywordContains - LIKE 검색)
+  - ✅ 카테고리별 필터링 (categoryIdEq)
+  - ✅ 가격 범위 필터링 (priceBetween - min/max 가격)
+  - ✅ 재고 여부 필터링 (inStock - 재고 > 0)
+  - ✅ 정렬 옵션 (getOrderSpecifier - 가격, 이름, 등록일 기준 오름차순/내림차순)
+  - ✅ 페이지네이션 지원 (Pageable 기반)
+  - ⚠️ Service/Controller 계층 연동 필요 (`ProductService`, `ProductController`에 search 메서드 추가 필요)
+  - ⚠️ `ProdSearchCond` DTO를 통한 검색 조건 전달 (현재 Repository에만 존재)
 
 - **상품 이미지 관리**
-  - 상품 이미지 업로드
+  - 상품 이미지 업로드 (파일 스토리지 연동 필요)
   - 이미지 다중 업로드
   - 이미지 삭제
-  - 이미지 URL 관리
+  - 이미지 URL 관리 (Product 엔티티에 imageUrl 필드 추가 필요)
+  - 이미지 리사이징 및 최적화
 
 - **상품 관리 고급 기능**
   - 상품 할인/프로모션
+    - 할인율 필드 추가
+    - 프로모션 기간 관리
+    - 할인가 자동 계산
   - 상품 상태 관리 (판매중, 품절, 판매중지)
+    - Product 엔티티에 status 필드 추가 필요
+    - 상태별 필터링
   - 상품 조회수 통계
+    - 조회수 필드 추가
+    - 조회수 증가 로직
   - 인기 상품 조회
+    - 판매량/조회수 기반 인기 상품 추출
 
 ## 3. 주문 관리 기능 확장
 
